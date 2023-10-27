@@ -32,6 +32,20 @@ However there were some more interesting aspects from a technical point of view 
 
 \subsection{Starting a Transaction}
 Get a Snapshot of $C_t = C$ and $B_t = B$, these won't change for the entire duration of the Transaction and are what
-ensures the "Repetable Read" property
+will ensure the "Repetable Read" property.
+
+\subsection{Performing a Read}
+When performing a Read, you search for the most recent row entry where the commit transaction id is the highest transaction id
+that is in $C$, so $tx_row \in C$
+
+\subsection{Performing a Write}
+For the first write, you obtain a $WT_t = WT + 1$ and update $WT = WT + 1$. \\
+Then when performing any write, you simply write the row entry the transaction id set to $WT_t$
+
+\subsection{Committing}
+% TODO
+
+\subsection{Aborting}
+% TODO
 
 \end{document}
