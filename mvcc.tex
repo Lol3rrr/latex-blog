@@ -5,8 +5,12 @@
 
 \begin{document}
 \section{Introduction}
-This is just a small idea I had while thinking about how I could implement MVCC for transactions in my custom
-toy database.
+MVCC, or Multi Version Concurrency Control, describes the group of methods used by databases to support multiple
+users accessing and using the database at the same time (concurrently). \\
+As far as I am aware most databases implement their custom mechanisms for that, which fit the goals and constraints
+of said project, however actually figuring out how these things work and the different approaches can seem daunting. \\
+So in this I want to summarize and think about an idea I had for an MVCC approach that I could use in my WIP database
+that is intended for learning and playing around with.
 
 \section{Properties}
 These are the core properties that I was interested in, from a standard database point of view
@@ -23,6 +27,11 @@ However there were some more interesting aspects from a technical point of view 
 \end{enumerate}
 
 \section{Idea}
+The Basic idea is to store version/transaction-ids and for reads you only consider the versions that were committed at
+the time of starting your transaction and for writes you obtain the next highest unused transaction id and perform all
+your writes during the transaction with that id and at the end you try to commit it, by "publishing" your transaction-id
+as being committed or aborted.
+
 \begin{enumerate}
 \item $C \subseteq \mathbb{N}$: The Committed Transactions
 \item $B \subseteq \mathbb{N}$: The Aborted Transactions
@@ -36,7 +45,7 @@ will ensure the "Repetable Read" property.
 
 \subsection{Performing a Read}
 When performing a Read, you search for the most recent row entry where the commit transaction id is the highest transaction id
-that is in $C$, so $tx_row \in C$
+that is in $C$, so $tx_{row} \in C$
 
 \subsection{Performing a Write}
 For the first write, you obtain a $WT_t = WT + 1$ and update $WT = WT + 1$. \\
