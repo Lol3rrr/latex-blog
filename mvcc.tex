@@ -8,13 +8,6 @@
 This is just a small idea I had while thinking about how I could implement MVCC for transactions in my custom
 toy database.
 
-\section{Idea}
-\begin{enumerate}
-\item $C \subseteq \mathbb{N}$: The Committed Transactions
-\item $B \subseteq \mathbb{N}$: The Aborted Transactions
-\item $C \cap B = \emptyset$
-\end{enumerate}
-
 \section{Properties}
 These are the core properties that I was interested in, from a standard database point of view
 \begin{enumerate}
@@ -28,5 +21,17 @@ However there were some more interesting aspects from a technical point of view 
 \item Transactiosn should not block each other
 \item High scalability
 \end{enumerate}
+
+\section{Idea}
+\begin{enumerate}
+\item $C \subseteq \mathbb{N}$: The Committed Transactions
+\item $B \subseteq \mathbb{N}$: The Aborted Transactions
+\item $C \cap B = \emptyset$
+\item $WT \in \mathbb{N}$
+\end{enumerate}
+
+\subsection{Starting a Transaction}
+Get a Snapshot of $C_t = C$ and $B_t = B$, these won't change for the entire duration of the Transaction and are what
+ensures the "Repetable Read" property
 
 \end{document}
