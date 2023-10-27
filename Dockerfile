@@ -3,7 +3,7 @@ FROM pandoc/latex as builder
 WORKDIR /data
 COPY . .
 
-RUN pandoc mvcc.tex -o mvcc.html
+RUN pandoc mvcc.tex -o mvcc.html -t html5
 
 FROM httpd:2.4
 
