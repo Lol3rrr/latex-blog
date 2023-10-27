@@ -9,7 +9,11 @@ This is just a small idea I had while thinking about how I could implement MVCC 
 toy database.
 
 \section{Idea}
-
+\begin{enumerate}
+\item $C \subseteq \mathbb{N}$: The Committed Transactions
+\item $B \subseteq \mathbb{N}$: The Aborted Transactions
+\item $C \cap B = \emptyset$
+\end{enumerate}
 
 \section{Properties}
 These are the core properties that I was interested in, from a standard database point of view
