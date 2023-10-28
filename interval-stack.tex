@@ -4,4 +4,28 @@
 \date{October 2023}
 
 \begin{document}
+
+\section{Why?}
+Recently I needed a way to store a set of timestamps, where I know that you should usually have all timestamps
+up to some point and maybe a couple of gaps, but mainly one continuos sequence. \\
+Additionally I needed to be able to get the largest timestamp so that $1..n$ would be in the set of timestamps
+I am storing. Naturally I found things like Range-Trees or Interval-Trees, however that seemed like overkill in
+this case, as I knew I would be mostly dealing with kind of increasing numbers and mostly one big interval with
+maybe a couple of smaller gaps, especially regarind the most recent timestamps. \\
+\\
+This lack of finding something that I felt did the job well and was not gonna be overly complex or just like too
+big of a tool for the job (does that make sense?) lead me to think of a very basic data structure that solves this
+problem very nice, which I am gonna call Interval-Stacks.
+
+\section{What is an 'Interval-Stack' then?}
+Well I am glad you asked. \\
+The Idea is not too unsimilar from the previously mentioned range/interval trees, however we are not gonna store
+it as a tree, at least not directly as there probably is some tree-ish structure hiding there somewhere. \\
+
+
+\section{How?}
+
+\section{Summary}
+\subsection{Use-Cases}
+
 \end{document}
