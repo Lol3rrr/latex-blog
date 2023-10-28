@@ -24,8 +24,61 @@ it as a tree, at least not directly as there probably is some tree-ish structure
 
 
 \section{How?}
+\subsection{Description}
+Instead of storing the individual timestamps, we only store sorted ranges/intervals of timestamps in a stack-like
+datastructure, where we can also merge/remove elements anywhere in the "Stack". \\
+Then every time we insert a new timestamp, we check if it already falls into one of the stored intervals, then
+we don't have to do anything, otherwise we search for the position in the stack, where the timestamp belongs and
+insert it there as an interval with a length of 1. \\
+After inserting we check the stack again and look for any intervals can be merged, if so we merge them into a single
+interval, reducing/keeping the size of the stack the same. \\
+\\
+This structure means that the smallest interval is the lowest in the stack, providing constant access time to it,
+likewise in the best case we only have to store a single interval on the stack, as it is just a single continuos
+interval of timestamps and in the worst case you have to store all $n$ timestamps on the stack, just like a normal
+set, while stilling having quick access to the lowest one.
+
+\subsection{Pseudo-Code}
+\begin{verbatim}
+fn contains(stack, timestamp) {
+	for interval in stack {
+		if timestamp in interval {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+fn insert_pos(stack, timestamp) {
+	for (idx, interval) in stack {
+		if interval < timestamp {
+			return idx;
+		}
+	}
+
+	return 0;
+}
+
+fn merge(stack) {
+	% TODO
+}
+
+fn insert(stack, timestamp) {
+	if contains(stack, timestamp) {
+		return;
+	}
+
+	pos = insert_pos(stack, timestamp);
+
+	insert(stack, pos, timestmp);
+
+	merge(stack);
+}
+\end{verbatim}
 
 \section{Summary}
 \subsection{Use-Cases}
+
 
 \end{document}
